@@ -1,4 +1,4 @@
-## Feel free to change the imports according to your implementation and needs
+
 import argparse
 import os
 import torch
@@ -8,24 +8,20 @@ from torchvision.models import resnet18
 from pathlib import Path
 import os
 
-from assignment_1_code.models.class_model import (
+from df.models.class_model import (
     DeepClassifier,
 )
-from assignment_1_code.models.cnn import YourCNN
-from assignment_1_code.metrics import Accuracy
-from assignment_1_code.trainer import ImgClassificationTrainer
-from assignment_1_code.datasets.cifar10 import CIFAR10Dataset
-from assignment_1_code.datasets.dataset import Subset
-from assignment_1_code.models.cnn import YourCNN
+from df.models.cnn import CNN
+from df.metrics import Accuracy
+from df.trainer import ImgClassificationTrainer
+from df.datasets.dataset import Subset
+from df.models.vit import VIT
 
 
 
 def train(args):
 
-    ### Implement this function so that it trains a specific model as described in the instruction.md file
-    ## feel free to change the code snippets given here, they are just to give you an initial structure
-    ## but do not have to be used if you want to do it differently
-    ## For device handling you can take a look at pytorch documentation
+    ###  this function trains a specific model 
 
     train_transform = v2.Compose(
         [
@@ -43,10 +39,10 @@ def train(args):
         ]
     )
 
-    train_data = CIFAR10Dataset(
+    train_data = Dataset(
         fdir=args.data_dir, subset=Subset.TRAINING, transform=train_transform
     )
-    val_data = CIFAR10Dataset(
+    val_data = Dataset(
         fdir=args.data_dir, subset=Subset.VALIDATION, transform=val_transform
     )
 
@@ -80,14 +76,14 @@ def train(args):
         device,
         args.num_epochs,
         model_save_dir,
-        batch_size=128,  # feel free to change
+        batch_size=128,  
         val_frequency=val_frequency,
     )
     trainer.train()
 
 
 if __name__ == "__main__":
-    ## Feel free to change this part - you do not have to use this argparse and gpu handling
+    
     args = argparse.ArgumentParser(description="Training")
     args.add_argument("--data_dir", type=str, required=True)
     args.add_argument("--num_epochs", type=int, default=30)

@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-from assignment_1_code.datasets.cifar10 import CIFAR10Dataset
-from assignment_1_code.datasets.dataset import Subset
+from df.datasets.images import Dataset
+from df.datasets.dataset import Subset
 
 
 def imshow(img):
@@ -17,22 +17,13 @@ def imshow(img):
 
 if __name__ == "__main__":
     classes = (
-        "plane",
-        "car",
-        "bird",
-        "cat",
-        "deer",
-        "dog",
-        "frog",
-        "horse",
-        "ship",
-        "truck",
+        # images dataset classes
     )
 
     transform = v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
 
-    train_data = CIFAR10Dataset(
-        fdir="your_path_to_the_dataset", subset=Subset.TRAINING, transform=transform
+    train_data = Dataset(
+        fdir="path_to_the_dataset", subset=Subset.TRAINING, transform=transform
     )
     train_data_loader = torch.utils.data.DataLoader(
         train_data, batch_size=8, shuffle=False, num_workers=2

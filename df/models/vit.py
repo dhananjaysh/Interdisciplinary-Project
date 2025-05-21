@@ -1,6 +1,6 @@
 
 # Source: Adapted and simplified from "An Image is Worth 16x16 Words"
-# Based on: https://github.com/lucidrains/vit-pytorch (MIT License)
+# Based on: https://github.com/lucidrains/vit-pytorch
 
 import torch
 import torch.nn as nn
@@ -22,7 +22,7 @@ class PatchEmbedding(nn.Module):
         return x
 
 
-class YourVIT(nn.Module):
+class VIT(nn.Module):
     def __init__(
         self,
         in_channels=3,

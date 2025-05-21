@@ -1,16 +1,16 @@
-## Feel free to change the imports according to your implementation and needs
+
 import argparse
 import os
 import torch
 import torchvision.transforms.v2 as v2
 import os
 
-from torchvision.models import resnet18  # change to the model you want to test
-from assignment_1_code.models.class_model import DeepClassifier
-from assignment_1_code.metrics import Accuracy
-from assignment_1_code.datasets.cifar10 import CIFAR10Dataset
-from assignment_1_code.datasets.dataset import Subset
-from assignment_1_code.models.cnn import YourCNN
+from torchvision.models import resnet18  
+from df.models.class_model import DeepClassifier
+from df.metrics import Accuracy
+from df.datasets.dataset import Subset
+from df.models.cnn import CNN
+from df.models.vit import VIT
 
 def test(args):
 
@@ -22,7 +22,7 @@ def test(args):
         ]
     )
 
-    test_data = CIFAR10Dataset(fdir="cifar-10-batches-py",
+    test_data = Dataset(fdir="dataset",
     subset=Subset.TEST,
     transform=transform)
     test_data_loader = torch.utils.data.DataLoader(
@@ -67,7 +67,7 @@ def test(args):
 
 
 if __name__ == "__main__":
-    ## Feel free to change this part - you do not have to use this argparse and gpu handling
+    
     args = argparse.ArgumentParser(description="Training")
     args.add_argument(
         "-d", "--gpu_id", default="5", type=str, help="index of which GPU to use"
